@@ -1,0 +1,11 @@
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Aturan Redirect untuk SPA (Single Page Application)
+# Mengarahkan semua request ke index.html agar Routing ditangani oleh React
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

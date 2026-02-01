@@ -1,0 +1,147 @@
+
+/* Custom Global Styles */
+
+body { 
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.document-font { font-family: 'Cambria', Georgia, serif; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: #dadce0; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6; 
+}
+
+/* Typography Overrides */
+.prose blockquote {
+  border-left: 4px solid #facc15; 
+  background-color: #fefce8; 
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-style: italic;
+  color: #854d0e; 
+  font-size: 0.9em;
+}
+
+/* =========================================
+    PRINT CSS OPTIMIZED
+   ========================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    /* 
+       PENTING: Margin 0mm menyembunyikan Header/Footer bawaan Browser 
+       (URL, Tanggal, Judul Halaman, dll).
+    */
+    margin: 0mm; 
+  }
+
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  #root, #root > div {
+    display: block !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    background: white !important;
+  }
+
+  #konten-dokumen {
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: block !important;
+      background: white !important;
+      max-width: none !important;
+  }
+
+  .force-page-break {
+      page-break-before: always !important;
+      break-before: page !important;
+      display: block !important;
+  }
+
+  .break-inside-avoid {
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+  }
+  
+  /* --- TABLE LAYOUT HACK FOR MARGINS --- */
+  /* Ini memaksa header/footer tabel muncul di tiap halaman sebagai margin */
+  
+  .print-layout-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .print-header-space {
+    height: 20mm; /* Tinggi Margin Atas */
+  }
+  
+  .print-footer-space {
+    height: 20mm; /* Tinggi Margin Bawah */
+  }
+  
+  .print-content-wrapper {
+    /* Margin Kiri & Kanan diatur di sini sebagai padding */
+    padding: 0 25mm; 
+  }
+
+  /* Pastikan thead dan tfoot berperilaku sebagai grup header/footer */
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  
+  /* --- CONTENT TABLE OPTIMIZATION --- */
+  /* Reset properti tabel konten agar tidak bentrok dengan layout tabel wrapper */
+  #konten-dokumen table {
+    page-break-inside: auto;
+    width: 100% !important;
+  }
+  
+  #konten-dokumen tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  #konten-dokumen thead {
+    display: table-header-group;
+  }
+  
+  #konten-dokumen tfoot {
+    display: table-footer-group;
+  }
+  
+  /* Prevent MathJax formulas from breaking awkwardly */
+  mjx-container, .MathJax {
+      page-break-inside: avoid;
+      display: inline-block;
+  }
+}
